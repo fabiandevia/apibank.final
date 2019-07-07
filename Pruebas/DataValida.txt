@@ -1,0 +1,12 @@
+{
+"nombres":"Camilo",
+"apellidos":"Rozo",
+"tipo_documento":"CC",
+"documento":"12345",
+"telefono":"12345678",
+"email":"Carlos@morroy.com",
+"direccion":"Calle 189 B 11-32",
+"pais":"Colombia",
+"departamento":"San Carlitta",
+"ciudad":"Soler"
+}

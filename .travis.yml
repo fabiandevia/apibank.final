@@ -1,0 +1,23 @@
+language: php
+
+php:
+  - '7.2'
+  - '7.3'
+
+services:
+  - mysql
+
+env:
+  global:
+
+    - DB_HOSTNAME=127.0.0.1
+    - DB_DATABASE= test
+    - DB_USERNAME=root
+    - DB_PASSWORD=
+ 
+
+before_install:
+  - mysql -e 'CREATE DATABASE test;'
+  
+script:
+ home/travis --test-all
