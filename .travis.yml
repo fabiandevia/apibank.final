@@ -19,7 +19,7 @@ before_install:
   - mysql -e 'CREATE DATABASE slim_sql;'
 
 before_script:
-  - mysql rest_api_slim_php < bd/slim.sql
+  - mysql slim_sql < bd/slim.sql
   - composer install
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter 
   - chmod +x ./cc-test-reporter 
