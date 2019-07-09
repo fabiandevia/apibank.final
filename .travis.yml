@@ -36,7 +36,7 @@ jobs:
     - stage: build docker image
       script:
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - docker build -t fabiandevia/apibank.final .
+      - docker build -t ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} .
       - docker images
-      - docker tag travis-apibank-demo fabiandevia/apibank.final
-      - docker push fabiandevia/apibank.final
+      - docker tag travis-apibank-demo ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT}
+      - docker push ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT}
