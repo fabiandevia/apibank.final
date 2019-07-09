@@ -17,7 +17,7 @@ env:
 
 before_install:
   - mysql -e 'CREATE DATABASE slim;'
-  - docker build -t "$TRAVIS_BRANCH" .
+  - docker build -t ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} .
 
 before_script:
   - mysql slim < bd/slim.sql
@@ -25,10 +25,9 @@ before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter 
   - chmod +x ./cc-test-reporter 
   - ./cc-test-reporter before-build
-  - docker images "$TRAVIS_BRANCH"
+  - docker images ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT}
 
 script:
   - vendor/bin/phpunit --coverage-text
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - if [ "$TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
-  make deploy; else make test; fi
+  - docker push ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT}
