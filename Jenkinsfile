@@ -1,34 +1,31 @@
-#!/usr/bin/env groovy
+# jenkins.yml
+version: "3.5"
 
-node('master') {
-    try {
-        stage('build') {
-            // Checkout the app at the given commit sha from the webhook
-            checkout scm
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    volumes:
+     - jenkins_home:/var/jenkins_home
+    networks:
+     - jenkins
 
-            // Install dependencies, create a new .env file and generate a new key, just for testing
-            sh "composer install"
-            sh "cp .env.example .env"
-            sh "php artisan key:generate"
+  jenkins-agent:
+    build: .
+    image: registry.example.com/jenkins-agent
+    volumes:
+     - /var/run/docker.sock:/var/run/docker.sock
+      - /tmp/jenkins:/tmp/jenkins
+    secrets:
+     - jenkins-password
+    networks:
+     - jenkins
 
-            // Run any static asset building, if needed
-            // sh "npm install && gulp --production"
-        }
+secrets:
+  jenkins-password:
+    external: true
 
-        stage('test') {
-            // Run any testing suites
-            sh "./vendor/bin/phpunit"
-        }
+volumes:
+  jenkins_home:
 
-        stage('deploy') {
-            // If we had ansible installed on the server, setup to run an ansible playbook
-            // sh "ansible-playbook -i ./ansible/hosts ./ansible/deploy.yml"
-            sh "echo 'WE ARE DEPLOYING'"
-        }
-    } catch(error) {
-        throw error
-    } finally {
-        // Any cleanup operations needed, whether we hit an error or not
-    }
-
-}
+networks:
+ jenkins:
