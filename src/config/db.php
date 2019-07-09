@@ -4,7 +4,7 @@
         private $host = 'localhost';
         private $usuario = 'root';
         private $password = '';
-        private $base = 'test';
+        private $base = 'slim';
         
 
         // Conectar a BD
