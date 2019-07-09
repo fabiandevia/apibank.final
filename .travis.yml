@@ -30,7 +30,6 @@ before_script:
 
 script:
   - vendor/bin/phpunit --coverage-text
-  - sudo apt-get -y install libxml2 libxml2-dev
 
 jobs:
   include:
