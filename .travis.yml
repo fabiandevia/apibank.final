@@ -20,7 +20,6 @@ env:
 
 before_install:
   - mysql -e 'CREATE DATABASE slim;'
-  - docker build -t ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} .
 
 before_script:
   - mysql slim < bd/slim.sql
@@ -28,9 +27,16 @@ before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter 
   - chmod +x ./cc-test-reporter 
   - ./cc-test-reporter before-build
-  - docker images ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT}
 
 script:
   - vendor/bin/phpunit --coverage-text
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT}
+
+jobs:
+  include:
+    - stage: build docker image
+      script:
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - docker build -t ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} .
+      - docker images
+      - docker tag travis-apibank-demo ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT}
+      - docker push ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT}
