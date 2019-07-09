@@ -30,7 +30,7 @@ before_script:
 
 script:
   - vendor/bin/phpunit --coverage-text
-  - sudo apt-get -y install libxslt-dev
+  - sudo apt-get -y install libxml2 libxml2-dev
   - export TAG=`if [[ $TRAVIS_PULL_REQUEST == "false" ]] && [[ $TRAVIS_BRANCH == "master" ]]; then echo "latest"; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi`
   - export REPO=bhavikk/level-three-rest
   - docker build -t $REPO:$TAG -f Dockerfile 
