@@ -5,15 +5,7 @@ ARG MYSQL_SERVER_PACKAGE=mysql-community-server-minimal-5.6.44
 ARG MYSQL_SHELL_PACKAGE=
 
 # Install server
-RUN yum install -y https://repo.mysql.com/mysql-community-minimal-release-el7.rpm \
-      https://repo.mysql.com/mysql-community-release-el7.rpm \
-  && yum-config-manager --enable mysql56-server-minimal \
-  && yum install -y \
-      $MYSQL_SERVER_PACKAGE \
-      $MYSQL_SHELL_PACKAGE \
-      libpwquality \
-  && yum clean all \
-  && mkdir /docker-entrypoint-initdb.d
+RUN apt-get install apache2 mysql-client mysql-server php7.0 libapache2-mod-php7.0
 
 VOLUME /var/lib/mysql
 
