@@ -16,7 +16,7 @@ env:
     - DB_PASSWORD=
 
 before_install:
-  - mysql -e 'CREATE DATABASE slim_sql;'
+  - mysql -e 'CREATE DATABASE slim;'
 
 before_script:
   - mysql slim < bd/slim.sql
