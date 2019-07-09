@@ -26,4 +26,4 @@ before_script:
   - ./cc-test-reporter before-build
 
 script:
-  - vendor/bin/phpunit --debug
+  - ./vendor/bin/phpunit
