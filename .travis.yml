@@ -25,5 +25,5 @@ before_script:
   - chmod +x ./cc-test-reporter 
   - ./cc-test-reporter before-build
 
-script:
-  - vendor/bin/phpunit --coverage-text
+  - ./phpunit --coverage-clover=coverage.xml
+  - ./phpunit --configuration ./build/travis-ci-fail.xml > /dev/null; if [ $? -eq 0 ]; then echo "SHOULD FAIL"; false; else echo "fail checked"; fi;
