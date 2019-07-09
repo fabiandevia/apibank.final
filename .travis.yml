@@ -29,4 +29,4 @@ before_script:
 script:
 - vendor/bin/phpunit --coverage-text
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-- docker push fabiandevia/apibank.final:tagname
+- docker push ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT}
