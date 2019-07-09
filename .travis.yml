@@ -29,7 +29,7 @@ install:
   - travis_retry composer update --prefer-dist --prefer-stable
 
 script:
-  - ls $TRAVIS_BUILD_DIR
-  - ls $TRAVIS_BUILD_DIR/Tests
-  - ls $TRAVIS_BUILD_DIR/vendor/bin/phpunit
-  - $TRAVIS_BUILD_DIR/vendor/bin/phpunit $TRAVIS_BUILD_DIR/Tests/EnvparserTest.php --coverage-clover=coverage.xml
+  - >
+    echo;
+    echo "Running unit tests";
+    .Build/bin/phpunit --colors  -c .Build/vendor/.../UnitTests.xml
