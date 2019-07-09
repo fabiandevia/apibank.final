@@ -25,3 +25,8 @@ before_script:
   - chmod +x ./cc-test-reporter 
   - ./cc-test-reporter before-build
 
+script:
+  - ls $TRAVIS_BUILD_DIR
+  - ls $TRAVIS_BUILD_DIR/Tests
+  - ls $TRAVIS_BUILD_DIR/vendor/bin/phpunit
+  - $TRAVIS_BUILD_DIR/vendor/bin/phpunit $TRAVIS_BUILD_DIR/Tests/StopwatchTest.php --coverage-clover=coverage.xml
