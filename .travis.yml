@@ -30,6 +30,6 @@ before_script:
   - docker run -d -p 127.0.0.1:8000:8000 ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT}
 
 script:
-- vendor/bin/phpunit --coverage-text
-- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-- docker push ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT}
+  - vendor/bin/phpunit --coverage-text
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT}
