@@ -31,14 +31,14 @@ before_script:
 script:
   - vendor/bin/phpunit --coverage-text
   - sudo apt-get -y install libxml2 libxml2-dev
-  - export TAG=`if [[ $TRAVIS_PULL_REQUEST == "false" ]] && [[ $TRAVIS_BRANCH == "master" ]]; then echo "latest"; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi`
-  - export REPO=bhavikk/level-three-rest
-  - docker build -t $REPO:$TAG -f Dockerfile 
 
- after_success:
- - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
- - if [[ $TRAVIS_PULL_REQUEST == "false" ]] && [[ $TRAVIS_BRANCH == "master" ]]; then
-   docker tag $REPO:$TAG $REPO:$TRAVIS_BUILD_NUMBER;
-   docker push $REPO:$TRAVIS_BUILD_NUMBER;
-   fi 
- - docker push $REPO:$TAG
+jobs:
+  include:
+    - stage: build docker image
+      script:
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - docker build -t ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} .
+      - docker images
+      - docker tag travis-apibank-demo ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT}
+      - docker push ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT}
+
