@@ -1,4 +1,4 @@
-FROM php:7.2-apache-mysql
+FROM php:7.1-apache-mysql
 FROM oraclelinux:7-slim
 
 ARG MYSQL_SERVER_PACKAGE=mysql-community-server-minimal-5.6.44
