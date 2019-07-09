@@ -11,7 +11,7 @@ env:
   global:
     - CC_TEST_REPORTER_ID=5acc45b5f48d4ca2a5baa0d22ee9a10890b29a76b3ef34a936fdd0ba8c5d7ba8
     - DB_HOSTNAME=127.0.0.1
-    - DB_DATABASE=slim_sql
+    - DB_DATABASE=slim
     - DB_USERNAME=root
     - DB_PASSWORD=
 
@@ -19,7 +19,7 @@ before_install:
   - mysql -e 'CREATE DATABASE slim_sql;'
 
 before_script:
-  - mysql slim_sql < bd/slim.sql
+  - mysql slim < bd/slim.sql
   - composer install
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter 
   - chmod +x ./cc-test-reporter 
