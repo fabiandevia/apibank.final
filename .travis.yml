@@ -31,7 +31,5 @@ script:
   - vendor/bin/phpunit --coverage-text
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT};
-    fi
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT}
