@@ -19,7 +19,8 @@ $app->get('/api/clientes', function(Request $request, Response $response){
 
         //Exportar y mostrar en formato JSON
         echo json_encode($clientes);
-
+		
+		//Se adjuntan Recuperadores de Errores
     } catch(PDOException $e){
         echo '{"error": {"text": '.$e->getMessage().'}';
     }
@@ -43,7 +44,7 @@ $app->get('/api/clientes/{id}', function(Request $request, Response $response){
 
         //Exportar y mostrar en formato JSON
         echo json_encode($cliente);
-        
+        //Se recoge los errores para posterior captura
     } catch(PDOException $e){
         echo '{"error": {"text": '.$e->getMessage().'}';
     }
@@ -51,6 +52,7 @@ $app->get('/api/clientes/{id}', function(Request $request, Response $response){
 
 
 // Agregar Cliente
+// Instaciamos las variables para que estas tomen los datos en Bases de Datos
 $app->post('/api/clientes/agregar', function(Request $request, Response $response){
     $nombres            = $request->getParam('nombres');
     $apellidos          = $request->getParam('apellidos');
@@ -62,7 +64,7 @@ $app->post('/api/clientes/agregar', function(Request $request, Response $respons
     $pais               = $request->getParam('pais');
     $departamento       = $request->getParam('departamento');
     $ciudad             = $request->getParam('ciudad');
-    
+
     $consulta = "INSERT INTO clientes (nombres, apellidos, tipo_documento, documento, telefono, email, direccion, pais, departamento, ciudad) VALUES
                                       (:nombres, :apellidos, :tipo_documento, :documento, :telefono, :email, :direccion, :pais, :departamento, :ciudad)";
     try{
@@ -91,6 +93,7 @@ $app->post('/api/clientes/agregar', function(Request $request, Response $respons
 
 
 // Actualizar Cliente
+// Se llama la funcion put para modificar el cliente, este no necesita nada mas que el Id, y los campos que se requieren cambiar
 $app->put('/api/clientes/actualizar/{id}', function(Request $request, Response $response){
     $id             = $request->getAttribute('id');
     $nombres        = $request->getParam('nombres');
