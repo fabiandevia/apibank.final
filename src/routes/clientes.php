@@ -83,7 +83,7 @@ $app->post('/api/clientes/agregar', function(Request $request, Response $respons
         $stmt->bindParam(':departamento',      $departamento);
         $stmt->bindParam(':ciudad',            $ciudad);
         $stmt->execute();
-        echo '{"notice": {"text": "Cliente agregado con exito"}';
+        echo '{"notice": {"text": "Cliente Exitosamente"}';
     } catch(PDOException $e){
         echo '{"error": {"text": '.$e->getMessage().'}';
     }
@@ -137,7 +137,7 @@ $app->put('/api/clientes/actualizar/{id}', function(Request $request, Response $
         $stmt->bindParam(':departamento',   $departamento);
         $stmt->bindParam(':ciudad',         $ciudad);
         $stmt->execute();
-        echo '{"notice": {"text": "Cliente actualizado con exito"}';
+        echo '{"notice": {"text": "Cliente Actulizado exitosamente"}';
     } catch(PDOException $e){
         echo '{"error": {"text": '.$e->getMessage().'}';
     }
@@ -157,7 +157,7 @@ $app->delete('/api/clientes/borrar/{id}', function(Request $request, Response $r
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $db = null;
-        echo '{"notice": {"text": "Cliente borrado con exito"}';
+        echo '{"notice": {"text": "Cliente Eliminado con Exito"}';
     } catch(PDOException $e){
         echo '{"error": {"text": '.$e->getMessage().'}';
     }
