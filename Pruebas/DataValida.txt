@@ -8,5 +8,5 @@
 "direccion":"Calle 189 B 11-32",
 "pais":"Colombia",
 "departamento":"San Carlitta",
-"ciudad":"Soler"
+"ciudad":"Palermo"
 }
